@@ -9,9 +9,7 @@
             var email=$("#emailid").val();
             var pass=$("#password").val();
             if(email!="" && pass!="") {
-                console.log(email);
-                console.log(pass);
-                $("#loading_spinner").css({"display":"block"});
+                //$("#loading_spinner").css({"display":"block"});
                 $.ajax({
                     type:'post',
                     url:'handle_login.php',
@@ -22,7 +20,6 @@
                     },
                     success: function(response) {
                         console.log(response);
-                        window.location.href="index.php";
                         if(response=="success")
                             {
                                 window.location.href="index.php";
@@ -32,12 +29,15 @@
                                 $("#loading_spinner").css({"display":"none"});
                                 alert("Incorrect Username/Password");
                             }
+                        else if(response=="incorrect")
+                        {
+                            alert("invalid email format")
+                        }
                     }
                 });
             } else {
                 alert("Please Fill All The Details");
             }
-            
             return false;
         }
     </script>
@@ -46,7 +46,7 @@
     <div id="wrapper">
     
     <div id="login_form">
-     <h1>LOGIN FORM</h1>
+     <h1>LOGIN</h1>
      <p id="login_label">Email : user@email.com | Password</p>
      <form method="post" action="handle_login.php" onsubmit="return enter_login();">
       <input type="text" name="emailid" id="emailid" placeholder="Enter Email">
@@ -55,7 +55,7 @@
       <br>
       <input type="submit" name="login" value="LOGIN" id="login_button">
      </form>
-     <p id="loading_spinner"><img src="images/loader.gif"></p>
+     <!-- <p id="loading_spinner"><img src="images/loader.gif"></p> -->
     </div>
     
     </div>
